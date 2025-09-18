@@ -25,10 +25,10 @@ function Login() {
                 // Accedemos al arreglo de authorities y verificamos si contiene "Gerente"
                 if (data.rol && data.rol.includes("Administrador")) {
                     navigate("/adminlayout");
-                } else if (data.rol && data.rol.includes("Medico")) {
-                    navigate("/workerlayout");
+                } else if (data.rol && data.rol.includes("MÉDICO")) {
+                    navigate("/MedicoLayout");
                 } else {
-                    navigate("/userlayout");
+                    navigate("/PacienteLayout");
                 }
             } else {
                 const errorData = await response.json();
