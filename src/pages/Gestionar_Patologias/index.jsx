@@ -23,7 +23,7 @@ export default function GestionarPatologias() {
   const handleDelete = async (patologia) => {
     if (!window.confirm(`¿Eliminar la patología ${patologia.nombre}?`)) return;
     try {
-      const res = await fetch(`https://clinica-backend-b8m9.onrender.com/api/patologias/${patologia.id}/`, {
+      const res = await fetch(`http://127.0.0.1:8000/api/patologias/${patologia.id}/`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Error eliminando");
@@ -41,7 +41,7 @@ export default function GestionarPatologias() {
   return (
     <div className="gestionar-patologia-container">
       <GestionarList
-        apiUrl="https://clinica-backend-b8m9.onrender.com/api/patologias"
+        apiUrl="http://127.0.0.1:8000/api/patologias"
         title="Gestión de Patologías"
         columns={columns}
         onEdit={handleEdit}

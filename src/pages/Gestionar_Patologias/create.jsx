@@ -24,7 +24,7 @@ export default function CrearPatologia() {
     setError("");
     setLoading(true);
     try {
-      const res = await fetch("https://clinica-backend-b8m9.onrender.com/api/patologias/", {
+      const res = await fetch("http://127.0.0.1:8000/api/patologias/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

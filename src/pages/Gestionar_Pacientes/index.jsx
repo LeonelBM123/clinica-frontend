@@ -25,7 +25,7 @@ export default function GestionarPacientes() {
   const handleDelete = async (paciente) => {
     if (!window.confirm(`¿Eliminar al paciente ${paciente.numero_historia_clinica}?`)) return;
     try {
-      const res = await fetch(`https://clinica-backend-b8m9.onrender.com/api/pacientes/${paciente.id}/`, {
+      const res = await fetch(`http://127.0.0.1:8000/api/pacientes/${paciente.id}/`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Error eliminando paciente");
@@ -43,7 +43,7 @@ export default function GestionarPacientes() {
   return (
     <div className="gestionar-pacientes-container">
       <GestionarList
-        apiUrl="https://clinica-backend-b8m9.onrender.com/api/pacientes"
+        apiUrl="http://127.0.0.1:8000/api/pacientes"
         title="Gestión de Pacientes"
         columns={columns}
         onEdit={handleEdit}

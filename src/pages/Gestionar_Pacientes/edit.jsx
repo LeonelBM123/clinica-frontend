@@ -27,7 +27,7 @@ export default function EditarPaciente() {
 useEffect(() => {
   const fetchPaciente = async () => {
     try {
-      const res = await fetch(`https://clinica-backend-b8m9.onrender.com/api/pacientes/${id}/`);
+      const res = await fetch(`http://127.0.0.1:8000/api/pacientes/${id}/`);
       if (!res.ok) throw new Error("Paciente no encontrado");
       const data = await res.json();
 
@@ -72,7 +72,7 @@ useEffect(() => {
     setError("");
     setLoading(true);
     try {
-      const res = await fetch(`https://clinica-backend-b8m9.onrender.com/api/pacientes/${id}/`, {
+      const res = await fetch(`http://127.0.0.1:8000/api/pacientes/${id}/`, {
         method: "PUT", // o PATCH si quieres actualizar parcialmente
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

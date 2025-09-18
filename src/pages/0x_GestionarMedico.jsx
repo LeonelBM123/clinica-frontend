@@ -15,7 +15,7 @@ export default function GestionarMedico() {
   const [modalMode, setModalMode] = useState('add');
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const API_URL = import.meta.env.VITE_API_URL+"api/medicos/";
+  const API_URL = "http://127.0.0.1:8000/api/medicos/";
 
   const columns = [
     { key: 'medico', label: 'ID', sortable: true, width: '80px' },
