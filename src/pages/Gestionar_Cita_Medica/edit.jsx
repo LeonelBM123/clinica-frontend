@@ -28,12 +28,11 @@ export default function EditarCitaMedica() {
   const handleSubmit = (data) => {
     setSaving(true);
     setError("");
-    // Para editar, es común usar PATCH en lugar de PUT si no se envían todos los campos
     api
       .patch(`/citas_pagos/citas-medicas/${id}/`, data)
       .then(() => {
         navigate("/dashboard/citas-medicas");
-        window.location.reload();
+        window.location.reload(); // Considera un manejo de estado global en vez de reload
       })
       .catch((e) => setError(e.message || "Error al actualizar la cita"))
       .finally(() => setSaving(false));

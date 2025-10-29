@@ -4,6 +4,7 @@ import AsyncSelect from "react-select/async";
 import { api } from "../../services/apiClient";
 import dayjs from "dayjs";
 import authService from "../../services/auth";
+import SeccionReporteIA from "./ReporteIAForms.jsx"; 
 
 const ESTADOS_CITA_OPTIONS = [
   { value: "PENDIENTE", label: "Pendiente" },
@@ -52,6 +53,7 @@ export default function CitaForm({
     hora_inicio: initialCita?.hora_inicio || "",
     notas: initialCita?.notas || "",
     estado_cita: initialCita?.estado_cita || "PENDIENTE",
+    reporte: initialCita?.reporte || "", // Se inicializa con el reporte de la BD
   });
 
   const [touched, setTouched] = useState({});
@@ -96,13 +98,11 @@ export default function CitaForm({
     return data.map((medico) => ({ label: medico.nombre, value: medico.id }));
   };
 
-  // --- LÓGICA DE LA OPCIÓN 2 ---
   useEffect(() => {
     if (selectedMedico?.value && fecha) {
       setLoadingHorarios(true);
       setHorarios([]);
 
-      // No reseteamos la hora si estamos en modo edición para mantener la selección
       if (!isEditMode) {
         setForm((f) => ({ ...f, hora_inicio: "", bloque_horario: null }));
       }
@@ -113,8 +113,6 @@ export default function CitaForm({
         )
         .then((data) => {
           let horariosDisponibles = Array.isArray(data) ? data : [];
-
-          // Si estamos editando y la hora original no está en la lista, la añadimos
           if (isEditMode && initialCita?.fecha === fecha) {
             const horaOriginalExiste = horariosDisponibles.some(
               (h) => h.hora_inicio === initialCita.hora_inicio
@@ -124,11 +122,10 @@ export default function CitaForm({
                 hora_inicio: initialCita.hora_inicio,
                 bloque_horario_id:
                   initialCita.bloque_horario_id || initialCita.bloque_horario,
-                tipo_atencion_nombre: "Cita Original", // Texto para diferenciar si es necesario
+                tipo_atencion_nombre: "Cita Original",
                 duracion_minutos: 0,
               };
               horariosDisponibles.push(horarioOriginal);
-              // Ordena los horarios para que la hora original no aparezca al final
               horariosDisponibles.sort((a, b) =>
                 a.hora_inicio.localeCompare(b.hora_inicio)
               );
@@ -143,9 +140,15 @@ export default function CitaForm({
     }
   }, [selectedMedico, fecha, isEditMode, initialCita]);
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Permite que SeccionReporteIA actualice el estado de este formulario
+  const handleReporteChange = (newReporte) => {
+    setForm((prev) => ({ ...prev, reporte: newReporte }));
   };
 
   const handleHorarioSelect = (horario) => {
@@ -156,6 +159,7 @@ export default function CitaForm({
     }));
   };
 
+  // El 'reporte' se envía al guardar
   const handleSubmit = (e) => {
     e.preventDefault();
     setTouched({
@@ -175,6 +179,7 @@ export default function CitaForm({
       notas: form.notas,
       estado_cita: form.estado_cita,
       medico: selectedMedico.value,
+      reporte: form.reporte, // ¡Se envía el reporte al guardar!
     };
     onSubmit(payload);
   };
@@ -237,7 +242,8 @@ export default function CitaForm({
           type="date"
           value={fecha}
           onChange={(e) => setFecha(e.target.value)}
-          disabled={loading || !selectedMedico} // Permitimos cambiar la fecha en modo edición
+          disabled={loading || !selectedMedico}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg"
         />
       </Field>
 
@@ -295,17 +301,29 @@ export default function CitaForm({
         </Field>
       )}
 
-      <Field label="Notas Adicionales">
+      <Field label="Notas del Paciente (al reservar)">
         <textarea
           name="notas"
           value={form.notas}
-          onChange={handleChange}
+          readOnly // El campo ya no es editable
           rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-          placeholder="Motivo de la consulta, recordatorios, etc."
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed" // Estilo de solo lectura
+          placeholder="El paciente no dejó notas al reservar."
         />
       </Field>
 
+      
+      {/* Sección de IA insertada */}
+      {/* Solo se muestra si estamos editando una cita existente */}
+      {isEditMode && (
+        <SeccionReporteIA 
+          citaId={initialCita.id}
+          initialReporte={form.reporte} // Pasa el reporte de la BD
+          onReporteChange={handleReporteChange} // Pasa el callback
+        />
+      )}
+
+      {/* Botones Principales del Formulario */}
       <div className="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t">
         <button
           type="button"

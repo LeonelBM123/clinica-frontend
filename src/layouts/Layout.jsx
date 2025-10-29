@@ -185,8 +185,6 @@ const getMenuPackagesByRole = (currentUser) => {
 
 export default function AdminLayout() {
   const currentUser = authService.getCurrentUser();
-   console.log('currentUser:', currentUser);
-  console.log('rol:', currentUser?.rol);
   const menuPackages = getMenuPackagesByRole(currentUser); 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
