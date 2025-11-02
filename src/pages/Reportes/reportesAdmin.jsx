@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, AlertCircle, FileText, Loader2 } from "lucide-react";
 import axios from "axios"; 
 const API_BASE_URL = "http://localhost:8000/api";//import.meta.env.VITE_API_URL;
+import VoiceCommandButton from "./reconocimieto_voz";
 
 export default function PaginaReportes() {
   const [loadingReport, setLoadingReport] = useState(null);
@@ -84,14 +85,14 @@ export default function PaginaReportes() {
       descripcion: 'Un reporte general de todas las citas.',
       personalizado:true
     },
-    {
+    {/*{
       id: 'pagos',
       titulo: 'Reporte de Facturación',
       urlPath: '/reportes/pagos/pdf/', 
       fileName: 'reporte_facturacion.pdf',
       descripcion: 'Un reporte detallado de todos los pagos y facturas emitidas.',
       personalizado:false
-    }
+    }*/}
   ];
 
 
@@ -173,7 +174,7 @@ export default function PaginaReportes() {
                       <button
                         onClick={() => handlePersonalizarReporte(report.id)}
                         disabled={loadingReport !== null} // Deshabilitado si algo más está cargando
-                        className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md transition-colors font-semibold"
+                        className="mt-3 sm:mt-0 sm:ml-4 w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md transition-colors font-semibold"
                       >
                         <FileText size={20} />
                         <span>
@@ -184,6 +185,13 @@ export default function PaginaReportes() {
                 </div>
               ))}
             </div>
+          </div>
+            <div className="p-6 border-b border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">Comando de Voz</h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Presiona el botón y di un comando, como "generar reporte de pacientes" o "ver dashboard de citas".
+            </p>
+            <VoiceCommandButton />
           </div>
         </div>
       </div>
