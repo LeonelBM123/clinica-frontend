@@ -85,14 +85,14 @@ export default function PaginaReportes() {
       descripcion: 'Un reporte general de todas las citas.',
       personalizado:true
     },
-    {/*{
+    /*{
       id: 'pagos',
       titulo: 'Reporte de Facturación',
       urlPath: '/reportes/pagos/pdf/', 
       fileName: 'reporte_facturacion.pdf',
       descripcion: 'Un reporte detallado de todos los pagos y facturas emitidas.',
       personalizado:false
-    }*/}
+    }*/
   ];
 
 
