@@ -67,6 +67,9 @@ import EditarResultadoExamen from "../pages/Gestionar_Resultados_Examenes/edit.j
 import PaginaReportes from "../pages/Reportes/reportesAdmin.jsx";
 import FormPersonalizar from "../pages/Reportes/formPersonalizar.jsx";
 
+//Paginas de gestion de Historias Clinicas
+import GestionarHistoriasClinicas from "../pages/Gestionar_Historias_Clinicas/index.jsx";
+import EditarHistorasClinicas from "../pages/Gestionar_Historias_Clinicas/edit.jsx";
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -209,12 +212,21 @@ const router = createBrowserRouter([
 
       //rutas para los reportes
       {
-        path:"reportes",
-        element:<PaginaReportes/>
+        path: "reportes",
+        element: <PaginaReportes />
       },
       {
-        path:"reportes/personalizar/:tipoReporte",
-        element:<FormPersonalizar/>
+        path: "reportes/personalizar/:tipoReporte",
+        element: <FormPersonalizar />
+      },
+
+      //rutas para gestion de Historias Clinicas
+      {
+        path: "historias-clinicas",
+        children: [
+          { path: "", element: <GestionarHistoriasClinicas /> },       // /dashboard/historias-clinicas
+          { path: ":id", element: <GestionarHistoriasClinicas /> },    // /dashboard/historias-clinicas/123
+        ],
       },
     ],
   },

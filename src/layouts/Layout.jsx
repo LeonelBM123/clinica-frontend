@@ -195,6 +195,11 @@ const getMenuPackagesByRole = (currentUser) => {
             path: "resultados-examenes",
             icon: <FileText size={iconSize} />,
           },
+          {
+            label: "Gestionar Historias Medicas",
+            path: "historias-clinicas",
+            icon: <Stethoscope size={iconSize} />,
+          },
         ],
       },
 
@@ -207,6 +212,7 @@ const getMenuPackagesByRole = (currentUser) => {
           },
         ],
       },
+
     ];
   }
 
