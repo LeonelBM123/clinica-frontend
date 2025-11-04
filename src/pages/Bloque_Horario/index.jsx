@@ -38,7 +38,7 @@ const GestionarBloqueHorario = () => {
       const bloquesData = await api.get("/doctores/bloques-horarios/");
       setBloques(Array.isArray(bloquesData) ? bloquesData : []);
 
-      const citasData = await api.get("/citas_pagos/citas-medicas/");
+      const citasData = await api.get("/citas_pagos/citas/");
       setCitas(Array.isArray(citasData) ? citasData : []);
     } catch (e) {
       console.error("Error al cargar datos:", e);

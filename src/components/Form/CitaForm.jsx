@@ -109,7 +109,7 @@ export default function CitaForm({
 
       api
         .get(
-          `/doctores/medicos/${selectedMedico.value}/horarios-disponibles-v2/?fecha=${fecha}`
+          `/doctores/medicos/${selectedMedico.value}/horarios-disponibles/?fecha=${fecha}`
         )
         .then((data) => {
           let horariosDisponibles = Array.isArray(data) ? data : [];

@@ -15,7 +15,7 @@ export default function EditarCitaMedica() {
   useEffect(() => {
     setLoading(true);
     api
-      .get(`/citas_pagos/citas-medicas/${id}/`)
+      .get(`/citas_pagos/citas/${id}/`)
       .then((data) => {
         setInitialData(data);
       })
@@ -29,7 +29,7 @@ export default function EditarCitaMedica() {
     setSaving(true);
     setError("");
     api
-      .patch(`/citas_pagos/citas-medicas/${id}/`, data)
+      .patch(`/citas_pagos/citas/${id}/`, data)
       .then(() => {
         navigate("/dashboard/citas-medicas");
         window.location.reload(); // Considera un manejo de estado global en vez de reload

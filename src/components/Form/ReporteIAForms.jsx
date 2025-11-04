@@ -51,7 +51,7 @@ export default function SeccionReporteIA({ citaId, initialReporte, onReporteChan
     setLoadingIA(true);
     setErrorIA(null);
     try {
-      const endpoint = `/citas_pagos/citas-medicas/${citaId}/generar-reporte-ia/`;
+      const endpoint = `/citas_pagos/citas/${citaId}/generar-reporte-ia/`;
       const response = await api.post(endpoint, { notas_vagas: notasVagas });
       
       const textoGenerado = response.reporte_generado;

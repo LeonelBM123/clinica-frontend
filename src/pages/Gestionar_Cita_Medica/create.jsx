@@ -13,7 +13,7 @@ export default function CrearCitaMedica() {
     setSaving(true);
     setError("");
     api
-      .post("/citas_pagos/citas-medicas/", data)
+      .post("/citas_pagos/citas/", data)
       .then(() => {
         // Podrías pasar un estado en la navegación para mostrar una notificación
         navigate("/dashboard/citas-medicas");
