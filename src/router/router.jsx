@@ -71,6 +71,9 @@ import FormPersonalizar from "../pages/Reportes/formPersonalizar.jsx";
 import GestionarHistoriasClinicas from "../pages/Gestionar_Historias_Clinicas/index.jsx";
 import EditarHistorasClinicas from "../pages/Gestionar_Historias_Clinicas/edit.jsx";
 
+// Backup
+import BackupPage from "../pages/Backup/backup.jsx";
+
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 const router = createBrowserRouter([
@@ -218,6 +221,12 @@ const router = createBrowserRouter([
       {
         path: "reportes/personalizar/:tipoReporte",
         element: <FormPersonalizar />
+      },
+
+      // Backup
+      {
+        path: "backup",
+        element: <BackupPage />,
       },
 
       //rutas para gestion de Historias Clinicas

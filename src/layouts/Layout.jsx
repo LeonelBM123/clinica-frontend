@@ -74,6 +74,11 @@ const getAllMenuPackages = () => {
           path: "configuracion-global",
           icon: <Settings size={20} />,
         },
+        {
+          label: "Backup",
+          path: "backup",
+          icon: <Box size={20} />,
+        },
       ],
     },
   ];
