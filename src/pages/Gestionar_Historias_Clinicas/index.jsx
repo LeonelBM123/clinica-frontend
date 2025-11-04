@@ -31,7 +31,7 @@ function ListaPacientes() {
         const fetchPacientes = async () => {
             try {
                 const res = await fetch(
-                    "http://127.0.0.1:8000/api/diagnosticos/pacientes/",
+                    `${import.meta.env.VITE_API_URL}/diagnosticos/pacientes/`,
                     {
                         headers: {
                             Authorization: `Token ${token}`,
@@ -210,7 +210,7 @@ function DetalleHistoriaClinica() {
         const fetchHistoria = async () => {
             try {
                 const res = await fetch(
-                    `http://127.0.0.1:8000/api/diagnosticos/pacientes/${id}/historia/`,
+                    `${import.meta.env.VITE_API_URL}/diagnosticos/pacientes/${id}/historia/`,
                     {
                         headers: {
                             Authorization: `Token ${token}`,
