@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, AlertCircle, FileText, Loader2 } from "lucide-react";
 import axios from "axios"; 
-const API_BASE_URL = "http://localhost:8000/api";//import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL; //"http://localhost:8000/api";
 import VoiceCommandButton from "./reconocimieto_voz";
 
 export default function PaginaReportes() {

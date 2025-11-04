@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom"; // <-- IMPORTAMOS useParams
+import { useNavigate, useParams } from "react-router-dom"; 
 import {
   ArrowLeft,
   AlertCircle,
@@ -8,7 +8,7 @@ import {
   List,
   FileDown,
   XCircle,
-  BarChart3, // <-- Importar para el nuevo gráfico
+  BarChart3, 
 } from "lucide-react";
 import { api } from "../../services/apiClient.js";
 import axios from "axios";
@@ -16,7 +16,7 @@ import {
   ResponsiveContainer,
   LineChart,
   Line,
-  BarChart, // <-- Importar para el nuevo gráfico
+  BarChart, 
   Bar,
   XAxis,
   YAxis,
@@ -25,14 +25,14 @@ import {
   Legend,
 } from "recharts";
 
-const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL;//"http://localhost:8000/api";
 
-// --- Función Helper para formatear fechas a YYYY-MM-DD ---
+//función Helper para formatear fechas
 const formatDate = (date) => {
   return date.toISOString().split("T")[0];
 };
 
-// --- Valores por defecto para las fechas (últimos 30 días) ---
+//valores por defecto para las fechas
 const getFechasDefault = (tipo) => {
   const fechaFin = new Date();
   const fechaInicio = new Date();

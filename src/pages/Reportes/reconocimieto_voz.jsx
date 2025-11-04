@@ -4,7 +4,7 @@ import { Mic, Loader2, AlertCircle } from 'lucide-react';
 import { api } from '../../services/apiClient';
 import axios from 'axios';
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL;//"http://127.0.0.1:8000/api";
 
 //confi de speech recognition
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
