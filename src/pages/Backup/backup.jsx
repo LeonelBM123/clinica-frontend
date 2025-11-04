@@ -35,9 +35,6 @@ export default function BackupPage() {
 
       const res = await fetch(url, {
         method: "GET",
-        headers: {
-          "X-Backup-Token": token,
-        },
       });
 
       if (!res.ok) {
