@@ -57,6 +57,19 @@ import GestionarBitacora from "../pages/Gestionar_Bitacora/index";
 import HistorialConsultas from "../pages/HistorialConsultas/index.jsx";
 import PacienteCitas from "../pages/HistorialConsultas/PacienteCitas.jsx";
 
+// Páginas de gestión de resultados de exámenes
+import GestionarResultadosExamenes from "../pages/Gestionar_Resultados_Examenes/index.jsx";
+import CrearResultadoExamen from "../pages/Gestionar_Resultados_Examenes/create.jsx";
+import EditarResultadoExamen from "../pages/Gestionar_Resultados_Examenes/edit.jsx";
+
+
+//paginas de reportes
+import PaginaReportes from "../pages/Reportes/reportesAdmin.jsx";
+import FormPersonalizar from "../pages/Reportes/formPersonalizar.jsx";
+
+//Paginas de gestion de Historias Clinicas
+import GestionarHistoriasClinicas from "../pages/Gestionar_Historias_Clinicas/index.jsx";
+import EditarHistorasClinicas from "../pages/Gestionar_Historias_Clinicas/edit.jsx";
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -175,10 +188,14 @@ const router = createBrowserRouter([
         ],
       },
 
-      // Gestión de Bitácora (Solo SuperAdmin y Admin)
+      // Gestión de Resultados de Exámenes
       {
-        path: "bitacora",
-        element: <GestionarBitacora />,
+        path: "resultados-examenes",
+        element: <GestionarResultadosExamenes />,
+        children: [
+          { path: "nuevo", element: <CrearResultadoExamen /> },
+          { path: ":id/editar", element: <EditarResultadoExamen /> },
+        ],
       },
 
       // Consultar Historial de Consultas (Doctor y/o Paciente)
@@ -191,6 +208,25 @@ const router = createBrowserRouter([
       {
         path: "pacientes/:idPaciente/citas",
         element: <PacienteCitas />,
+      },
+
+      //rutas para los reportes
+      {
+        path: "reportes",
+        element: <PaginaReportes />
+      },
+      {
+        path: "reportes/personalizar/:tipoReporte",
+        element: <FormPersonalizar />
+      },
+
+      //rutas para gestion de Historias Clinicas
+      {
+        path: "historias-clinicas",
+        children: [
+          { path: "", element: <GestionarHistoriasClinicas /> },       // /dashboard/historias-clinicas
+          { path: ":id", element: <GestionarHistoriasClinicas /> },    // /dashboard/historias-clinicas/123
+        ],
       },
     ],
   },

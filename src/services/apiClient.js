@@ -1,14 +1,11 @@
 import axios from "axios";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;//"http://localhost:8000/api";
+const API_BASE_URL = "http://localhost:8000/api"; // import.meta.env.VITE_API_URL;
 
 class ApiClient {
   constructor() {
     this.client = axios.create({
-      baseURL: API_BASE_URL,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      baseURL: API_BASE_URL
     });
 
     // Interceptor para agregar token automáticamente
@@ -134,7 +131,12 @@ class ApiClient {
   }
   async post(url, data) {
     try {
-      const response = await this.client.post(url, data);
+      let config = {};
+      // Si es FormData, no enviar Content-Type para que axios lo ponga automáticamente
+      if (data instanceof FormData) {
+        config.headers = {};
+      }
+      const response = await this.client.post(url, data, config);
       return response.data;
     } catch (error) {
       const errorData = error.response?.data;
