@@ -208,7 +208,7 @@ const getMenuPackagesByRole = (currentUser) => {
           {
             label: "Reportes de atencion",
             path: "reportes",
-            icon: "🗿",
+            icon: "",
           },
         ],
       },
