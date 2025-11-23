@@ -58,7 +58,7 @@ const Suscripciones = () => {
 
             <main className="py-16 px-4 sm:px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h1 className="text-4xl font-bold text-blue-900 mb-4">
+                    <h1 className="text-4xl font-bold text-blue-900  mb-4">
                         Elige el plan perfecto para tu clínica
                     </h1>
                     <p className="text-xl text-gray-600">
