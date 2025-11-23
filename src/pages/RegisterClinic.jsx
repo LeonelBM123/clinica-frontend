@@ -1,9 +1,36 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { Eye, MapPin, Phone, Mail, Building } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { Eye, MapPin, Phone, Mail, Building,CheckCircle } from 'lucide-react';
 import apiClient from '../services/apiClient';
 
 function RegisterClinic() {
+    const [searchParams] = useSearchParams(); 
+    const planIdFromUrl = searchParams.get('plan');
+    const [planNombre, setPlanNombre] = useState("");
+    const [loadingPlan, setLoadingPlan] = useState(false);
+    
+    useEffect(() => {
+        if (planIdFromUrl) {
+            setLoadingPlan(true);
+            setFormData(prev => ({ ...prev, plan_id: planIdFromUrl }));
+            const API_BASE_URL = import.meta.env.VITE_API_URL;//"http://localhost:8000/api";
+        
+            fetch(`${API_BASE_URL}/suscripciones/planes/${planIdFromUrl}/`)
+                .then(res => {
+                    if (!res.ok) throw new Error("No se encontró el plan");
+                    return res.json();
+                })
+                .then(data => {
+                    setPlanNombre(data.nombre); 
+                })
+                .catch(err => {
+                    console.error("Error cargando plan:", err);
+                    setPlanNombre("Desconocido");
+                })
+                .finally(() => setLoadingPlan(false));
+        }
+    }, [planIdFromUrl]);
+
     const [formData, setFormData] = useState({
         nombre: "",
         descripcion: "",
@@ -17,7 +44,8 @@ function RegisterClinic() {
         admin_telefono: "",
         admin_direccion: "",
         admin_password: "",
-        admin_confirm_password: ""
+        admin_confirm_password: "",
+        plan:planIdFromUrl||""
     });
     
     const [loading, setLoading] = useState(false);
@@ -116,7 +144,8 @@ function RegisterClinic() {
                 admin_fecha_nacimiento: formData.admin_fecha_nacimiento,
                 admin_telefono: formData.admin_telefono,
                 admin_direccion: formData.admin_direccion,
-                admin_password: formData.admin_password
+                admin_password: formData.admin_password,
+                plan_id:formData.plan
             };
 
             await apiClient.createGrupo(grupoData);
@@ -143,6 +172,11 @@ function RegisterClinic() {
                         <div className="flex items-center justify-center mb-4">
                             <Eye className="w-12 h-12 text-green-600 mr-3" />
                             <h2 className="text-3xl font-bold text-gray-800">Registrar Nueva Clínica</h2>
+                        </div>
+
+                        <div className="mt-4 inline-flex items-center bg-blue-50 text-blue-700 px-4 py-2 rounded-full border border-blue-200 text-sm font-medium">
+                            <CheckCircle className="w-4 h-4 mr-2" />
+                            Plan seleccionado:  "{planNombre}". Se activará al registrar.
                         </div>
                         <p className="text-gray-600 mt-2">
                             Complete los datos de su clínica y del administrador principal

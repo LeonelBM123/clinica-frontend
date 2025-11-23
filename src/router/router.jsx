@@ -74,6 +74,9 @@ import EditarHistorasClinicas from "../pages/Gestionar_Historias_Clinicas/edit.j
 // Backup
 import BackupPage from "../pages/Backup/backup.jsx";
 
+//suscripciones
+import Suscripciones from "../pages/Suscripciones.jsx"
+
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 const router = createBrowserRouter([
@@ -109,6 +112,14 @@ const router = createBrowserRouter([
         <ResetPassword />
       </PublicRoute>
     ),
+  },
+  {
+    path:"/choice_plan",
+    element:(
+      <PublicRoute>
+          <Suscripciones/>
+      </PublicRoute>
+    )
   },
   // Layout principal - todas las rutas autenticadas usando AdminLayout
 
