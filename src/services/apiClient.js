@@ -219,6 +219,16 @@ class ApiClient {
   async createGrupo(data) {
     return this.post("/cuentas/grupos/", data);
   }
+
+  async getBIDashboard() {
+    // GET /api/bi/analytics/dashboard/
+    return this.get('/bi/analytics/dashboard/');
+  }
+
+  async runETL() {
+    // POST /api/bi/analytics/run-etl/
+    return this.post('/bi/analytics/run-etl/', {});
+  }
 }
 
 // Crear una instancia única
