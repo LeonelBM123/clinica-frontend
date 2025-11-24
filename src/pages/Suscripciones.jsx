@@ -33,9 +33,44 @@ const Suscripciones = () => {
             });
     }, []);
 
-    const handleSelectPlan = (planId) => {
-        navigate(`/register-clinic?plan=${planId}`);
+    const handleSelectPlan = async (planId) => {
+        
+        const API_BASE_URL = import.meta.env.VITE_API_URL;
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            if (window.confirm("¿Deseas suscribirte a este plan con tu cuenta actual?")) {
+                try {
+                    setLoading(true); 
+                    
+                    const response = await fetch(`${API_BASE_URL}/suscripciones/suscripciones/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Token ${token}`
+                        },
+                        body: JSON.stringify({ plan_id: planId })
+                    });
+
+                    if (response.ok) {
+                        alert("¡Plan agregado exitosamente a tu cuenta!");
+                        navigate('/dashboard'); 
+                    } else {
+                        const errorData = await response.json();
+                        alert("No se pudo procesar la suscripción: " + (errorData.detail || "Error desconocido"));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Error de conexión al intentar suscribirse.");
+                } finally {
+                    setLoading(false);
+                }
+            }
+        } else {
+            navigate(`/register-clinic?plan=${planId}`);
+        }
     };
+
 
     if (loading) {
         <Loader/>

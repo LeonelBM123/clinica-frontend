@@ -24,6 +24,8 @@ import {
   Eye,
   CalendarRange,
   CalendarPlus2,
+  Lock,
+  BarChart2
 } from "lucide-react";
 
 const getAllMenuPackages = () => {
@@ -88,6 +90,23 @@ const getMenuPackagesByRole = (currentUser) => {
   const rol = currentUser?.rol;
 
   const iconSize = 20;
+  const tieneAccesoReportes = currentUser?.reportes || false; 
+
+  const reportesItem = tieneAccesoReportes
+    ? {
+        label: "Reportes Financieros",
+        path: "reportes",
+        icon: <BarChart2 size={iconSize} />,
+        locked: false
+      }
+    : {
+        label: "Reportes (Obten la version Enterprise)",
+        path: "/choice_plan", 
+        icon: <Lock size={iconSize} />,
+        locked: true
+      };
+
+
 
   const baseMenu = [
     {
@@ -156,11 +175,9 @@ const getMenuPackagesByRole = (currentUser) => {
       },
       {name: "Reportes",
         items: [
-          {
-            label: "Reportes de servicios",
-            path: "reportes",
-            icon: "🗿",
-          },
+          
+            reportesItem
+        
         ],
       },
     ];

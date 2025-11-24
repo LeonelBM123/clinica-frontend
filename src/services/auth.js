@@ -45,7 +45,8 @@ class AuthService {
       grupo_id: response.grupo_id,
       grupo_nombre: response.grupo_nombre,
       puede_acceder: response.puede_acceder,
-      correo: correo
+      correo: correo,
+      reportes: response.reportes
     };
     this.saveUserToStorage(userData);
     return userData;
@@ -66,6 +67,12 @@ class AuthService {
 
   isAdmin() {
     return this.currentUser?.rol === 'administrador';
+  }
+
+  canViewReports() {
+    if (this.isSuperAdmin()) return true;
+    
+    return this.currentUser?.reportes === true;
   }
 
   isMedico() {

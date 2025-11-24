@@ -116,9 +116,9 @@ const router = createBrowserRouter([
   {
     path:"/choice_plan",
     element:(
-      <PublicRoute>
+      
           <Suscripciones/>
-      </PublicRoute>
+      
     )
   },
   // Layout principal - todas las rutas autenticadas usando AdminLayout
