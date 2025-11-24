@@ -133,6 +133,7 @@ const BIDashboard = () => {
 // ==========================================
 
 const ResumenView = ({ data }) => {
+  if (!data) return <div className="text-red-500">No hay datos para mostrar.</div>;
   // Extraemos todos los datos necesarios
   const { kpis, tendencia, top_medicos } = data;
   

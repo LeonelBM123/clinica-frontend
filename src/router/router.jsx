@@ -1,3 +1,4 @@
+
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../home/HomePage";
 import ResetPassword from "../pages/RecuperarPassword"
@@ -237,6 +238,7 @@ const router = createBrowserRouter([
           { path: ":id", element: <GestionarHistoriasClinicas /> },    // /dashboard/historias-clinicas/123
         ],
       },
+
     ],
   },
 ]);

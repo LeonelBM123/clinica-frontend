@@ -110,7 +110,7 @@ export default function Sidebar({ menuPackages, isSidebarOpen, toggleSidebar }) 
         </nav>
 
         {/* Pie del Sidebar y botón de cerrar sesión */}
-        <div className="border-t border-slate-700 p-4">
+        <div className="border-t border-slate-700 p-4 flex flex-col gap-2 items-center">
           <button
             onClick={handleLogout}
             className="flex items-center w-full px-3 py-2 text-sm font-bold tracking-widest
@@ -120,7 +120,7 @@ export default function Sidebar({ menuPackages, isSidebarOpen, toggleSidebar }) 
             <LogOut className="w-5 h-5 mr-3 text-blue-300" />
             CERRAR SESIÓN
           </button>
-          <p className="text-center text-xs text-slate-500 mt-4">
+          <p className="text-center text-xs text-slate-500 mt-2">
             © {new Date().getFullYear()} Visionex Admin
           </p>
         </div>
