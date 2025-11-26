@@ -202,6 +202,12 @@ const router = createBrowserRouter([
         ],
       },
 
+      // Gestión de Bitácora (Admin)
+      {
+        path: "bitacora",
+        element: <GestionarBitacora />
+      },
+
       // Gestión de Resultados de Exámenes
       {
         path: "resultados-examenes",

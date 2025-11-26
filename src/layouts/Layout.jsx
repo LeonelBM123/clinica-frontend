@@ -62,7 +62,7 @@ const getAllMenuPackages = () => {
           icon: <HeartPulse size={20} />,
         },
         {
-          label: "Ver Bitácora",
+          label: "Ver Bitácora",  
           path: "bitacora",
           icon: <ClipboardList size={20} />,
         },
